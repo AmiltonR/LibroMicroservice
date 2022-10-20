@@ -1,4 +1,5 @@
-﻿using Libros.Domain.DTOs.GetDTOs;
+﻿using Libros.Domain.DTOs;
+using Libros.Domain.DTOs.GetDTOs;
 using Libros.Domain.DTOs.PostDTOs;
 using Libros.Domain.DTOs.PutDTOs;
 
@@ -13,6 +14,6 @@ namespace Libros.API.Repository
         Task<bool> SaveNewBook(LibroEncNuevoDTO libroPost);
         Task<bool> UpdateBook(LibroEncPutDTO libroUpdate);
 
-
+        Task<IEnumerable<CategoriaLibrosDTO>> CategoriaLibros();
     }
 }

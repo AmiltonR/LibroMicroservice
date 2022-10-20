@@ -1,10 +1,13 @@
 {
   "dependencies": {
     "mssql1": {
-      "secretStore": "LocalSecretsFile",
+      "secretStore": "AzureKeyVault",
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/databasesutec/databases/BibliotecaLibros",
       "type": "mssql.azure",
-      "connectionId": "ConnectionStrings:DefaultConnection",
+      "connectionId": "ConnectionStrings:DefaultConnection"
+    },
+    "secrets2": {
+      "type": "secrets.user",
       "dynamicId": null
     }
   }

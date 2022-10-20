@@ -43,6 +43,27 @@ namespace Libros.API.Controllers
         }
 
         [HttpGet]
+        [Route("CategoriaLibros")]
+        public async Task<Object> GetCategoriaLibros()
+        {
+            IEnumerable<CategoriaLibrosDTO> list = null;
+            try
+            {
+                list = await _bookRepository.CategoriaLibros();
+                _responseDTO.Result = list;
+                _responseDTO.Success = true;
+                _responseDTO.Message = "Libros";
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.Message = "Algo ocurió :(";
+                _responseDTO.ErrorMessages = new List<string>() { ex.ToString() };
+                throw;
+            }
+            return Ok(_responseDTO);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<Object> GetById(int id)
         {
@@ -56,7 +77,7 @@ namespace Libros.API.Controllers
             }
             catch (Exception ex)
             {
-                _responseDTO.Message = "Algo ocurió :(";
+                _responseDTO.Message = "Algo ocurrió :(";
                 _responseDTO.ErrorMessages = new List<string>() { ex.ToString() };
                 throw;
             }
@@ -77,7 +98,7 @@ namespace Libros.API.Controllers
             }
             catch (Exception ex)
             {
-                _responseDTO.Message = "Algo ocurió :(";
+                _responseDTO.Message = "Algo ocurrió :(";
                 _responseDTO.ErrorMessages = new List<string>() { ex.ToString() };
                 throw;
             }

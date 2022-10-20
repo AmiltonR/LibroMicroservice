@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Libros.Domain.DTOs;
 using Libros.Domain.DTOs.GetDTOs;
 using Libros.Domain.DTOs.PostDTOs;
 using Libros.Domain.DTOs.PutDTOs;
 using Libros.Domain.Entities;
 using Libros.Infrastructure;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Hosting;
 using System.Collections.Generic;
 
 namespace Libros.API.Repository
@@ -146,6 +148,32 @@ namespace Libros.API.Repository
                 throw;
             }
             return flag;
+        }
+
+        public async Task<IEnumerable<CategoriaLibrosDTO>> CategoriaLibros()
+        {
+            var query = _db.LibrosEncabezado
+                     .GroupBy(l => new { l.IdCategoria, l.Ejemplares, l.categoria.NombreCategoria })
+                    .Select(g => new
+                    {
+                        g.Key.IdCategoria,
+                        g.Key.NombreCategoria,
+                        Ejemplares = g.Sum(o => o.Ejemplares),
+                    });
+
+            List<CategoriaLibrosDTO> list = new List<CategoriaLibrosDTO>();
+            foreach (var item in query)
+            {
+                var r = new CategoriaLibrosDTO
+                {
+                    IdCategoria = item.IdCategoria,
+                    NombreCategoria = item.NombreCategoria,
+                    Ejemplares = item.Ejemplares
+                };
+                list.Add(r);
+            }
+
+            return list;
         }
     }
 }
