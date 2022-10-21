@@ -153,7 +153,7 @@ namespace Libros.API.Repository
         public async Task<IEnumerable<CategoriaLibrosDTO>> CategoriaLibros()
         {
             var query = _db.LibrosEncabezado
-                     .GroupBy(l => new { l.IdCategoria, l.Ejemplares, l.categoria.NombreCategoria })
+                     .GroupBy(l => new { l.categoria.NombreCategoria, l.IdCategoria})
                     .Select(g => new
                     {
                         g.Key.IdCategoria,
