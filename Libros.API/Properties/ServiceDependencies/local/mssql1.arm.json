@@ -4,7 +4,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "RG-UTEC",
+      "defaultValue": "Biblioteca",
       "metadata": {
         "_parameterType": "resourceGroup",
         "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
@@ -51,24 +51,23 @@
             {
               "kind": "v12.0",
               "location": "[parameters('resourceLocation')]",
-              "name": "databasesutec",
+              "name": "bibliotecalibrosserver",
               "type": "Microsoft.Sql/servers",
               "apiVersion": "2017-10-01-preview"
             },
             {
               "sku": {
-                "name": "GP_S_Gen5",
-                "tier": "GeneralPurpose",
-                "family": "Gen5",
-                "capacity": 1
+                "name": "Free",
+                "tier": "Free",
+                "capacity": 5
               },
-              "kind": "v12.0,user,vcore,serverless",
+              "kind": "v12.0,user",
               "location": "[parameters('resourceLocation')]",
-              "name": "databasesutec/BibliotecaLibros",
+              "name": "bibliotecalibrosserver/BibliotecaLibros",
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2017-10-01-preview",
               "dependsOn": [
-                "databasesutec"
+                "bibliotecalibrosserver"
               ]
             }
           ]
