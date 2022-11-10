@@ -23,7 +23,7 @@ namespace Libros.API.Repository
 
         public async Task<IEnumerable<LibrosDetalleDTO>> GetLibrosDetalle(int id)
         {
-            List<LibrosDetalle> libros = await _db.LibrosDetalle.Where(l => l.IdLibro == id && l.Estado == 1).ToListAsync();
+            List<LibrosDetalle> libros = await _db.LibrosDetalle.Where(l => l.IdLibro == id && l.Estado == 1).Include(l => l.librosEncabezado.NombreLibro).ToListAsync();
             return _mapper.Map<List<LibrosDetalleDTO>>(libros);
         }
 
