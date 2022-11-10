@@ -10,7 +10,7 @@ namespace Libros.API.Repository
 {
     public class BookDetailsRepository : IBookDetailsRepository
     {
-
+        //Controlador de Libros Detalle
         private readonly BookContext _db;
         private IMapper _mapper;
         private IBookRepository _bookRepository;

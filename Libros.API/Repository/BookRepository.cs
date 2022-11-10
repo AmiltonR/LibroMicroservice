@@ -20,7 +20,7 @@ namespace Libros.API.Repository
             _db = db;
             _mapper = mapper;
         }
-
+        //Obtiene la data de libros encabezado
         public async Task<IEnumerable<LibrosEncabezadoDTO>> GetLibrosEncabezado()
         {
            var query = await _db.Categoria
@@ -43,13 +43,14 @@ namespace Libros.API.Repository
             List<LibrosEncabezadoDTO> librosList = query;
             return librosList;
         }
+
+        //Obtiene el libro por Id
         public async Task<LibrosEncabezadoSimpDTO> GetLibro(int id)
         {
             LibrosEncabezado? libros = await _db.LibrosEncabezado.FirstOrDefaultAsync(l => l.Id == id);
             LibrosEncabezadoSimpDTO? libroDto = _mapper.Map<LibrosEncabezadoSimpDTO>(libros);
             return libroDto;
         }
-
         public async Task<IEnumerable<LibrosEncabezadoDTO>> GetLibrosEncabezadoByCategory(int Id)
         {
             var query = await _db.Categoria
@@ -115,7 +116,6 @@ namespace Libros.API.Repository
             }
             return flag;
         }
-
         public async Task<int> SetNewQuantity(LibrosEncPutQuantityDTO librosQuantity)
         {
             int flag = 0;
@@ -126,7 +126,6 @@ namespace Libros.API.Repository
             flag = await _db.SaveChangesAsync();
             return flag;
         }
-
         public async Task<bool> UpdateBook(LibroEncPutDTO libroUpdate)
         {
             bool flag = false;
@@ -149,7 +148,6 @@ namespace Libros.API.Repository
             }
             return flag;
         }
-
         public async Task<IEnumerable<CategoriaLibrosDTO>> CategoriaLibros()
         {
             var query = _db.LibrosEncabezado
