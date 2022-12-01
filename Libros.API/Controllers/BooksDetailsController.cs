@@ -30,17 +30,29 @@ namespace Libros.API.Controllers
             try
             {
                 librosDto = await _bookDetailsRepository.GetAllBooks();
-                _responseDTO.Result = librosDto;
-                _responseDTO.Success = true;
-                _responseDTO.Message = "Libros";
             }
             catch (Exception ex)
             {
-                _responseDTO.Message = "Algo ocurió :(";
-                _responseDTO.ErrorMessages = new List<string>() { ex.ToString() };
                 throw;
             }
-            return Ok(_responseDTO);
+            return Ok(librosDto);
+        }
+
+        [HttpGet]
+        [Route("libro/{id}")]
+        //Obtiene un libro. Se usa en el microservicio de préstamos
+        public async Task<Object> GetBook(int id)
+        {
+            LibrosDTO libroDto = null;
+            try
+            {
+                libroDto = await _bookDetailsRepository.GetBook(id);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+            return Ok(libroDto);
         }
 
         [HttpGet]
