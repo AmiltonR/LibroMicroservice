@@ -122,5 +122,46 @@ namespace Libros.API.Repository
             }
             return flag;
         }
+
+        public async Task<IEnumerable<LibrosDTO>> GetAllBooks()
+        {
+            List<LibrosDTO> libros = new List<LibrosDTO>();
+            LibrosDTO libro;
+            List<LibrosDetalle> librosDetalle;
+            try
+            {
+                librosDetalle = await _db.LibrosDetalle.Include(l => l.librosEncabezado).OrderBy(l => l.librosEncabezado.NombreLibro).ToListAsync();
+                //Carga de lista
+                foreach (var item in librosDetalle)
+                {
+                    string condicion = String.Empty;
+                    if (item.Condicion == 'N')
+                    {
+                        condicion = "Nuevo";
+                    }
+                    else
+                    {
+                        condicion = "Usado";
+                    }
+                    libro = new LibrosDTO
+                    {
+                        Id = item.Id,
+                        NombreLibro = item.librosEncabezado.NombreLibro,
+                        Isbn = item.Isbn,
+                        Condicion = condicion,
+                        Editorial = item.Editorial,
+                        Detalle = item.Detalle,
+                        FechaIngreso = item.FechaIngreso.ToShortDateString()
+                    };
+                    libros.Add(libro);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return libros;
+        }
     }
 }

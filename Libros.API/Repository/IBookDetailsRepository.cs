@@ -6,6 +6,7 @@ namespace Libros.API.Repository
 {
     public interface IBookDetailsRepository
     {
+        Task<IEnumerable<LibrosDTO>> GetAllBooks();
         Task<IEnumerable<LibrosDetalleDTO>> GetLibrosDetalle(int id);
         Task<LibrosDetalleDTO> GetLibroDetalleById(int id);
         Task<bool> SaveNewBook(LibrosEncPutNewBooks libros);

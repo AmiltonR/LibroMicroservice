@@ -26,5 +26,6 @@ namespace Libros.Domain.Entities
         public int Ejemplares { get; set; }
         [ForeignKey("IdCategoria")]
         public Categorias categoria { get; set; }
+        public virtual ICollection<LibrosDetalle> LibrosDetalles { get; set; } 
     }
 }

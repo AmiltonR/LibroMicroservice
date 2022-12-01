@@ -23,6 +23,27 @@ namespace Libros.API.Controllers
         }
 
         [HttpGet]
+        //Obtiene todos los libros. Se usa en el microservicio de préstamos
+        public async Task<Object> GetAllBooks()
+        {
+            IEnumerable<LibrosDTO> librosDto = null;
+            try
+            {
+                librosDto = await _bookDetailsRepository.GetAllBooks();
+                _responseDTO.Result = librosDto;
+                _responseDTO.Success = true;
+                _responseDTO.Message = "Libros";
+            }
+            catch (Exception ex)
+            {
+                _responseDTO.Message = "Algo ocurió :(";
+                _responseDTO.ErrorMessages = new List<string>() { ex.ToString() };
+                throw;
+            }
+            return Ok(_responseDTO);
+        }
+
+        [HttpGet]
         [Route("{id}")]
         public async Task<Object> GetBooks(int id)
         {
