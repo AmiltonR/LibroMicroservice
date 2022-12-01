@@ -170,7 +170,7 @@ namespace Libros.API.Repository
             LibrosDetalle librosDetalle;
             try
             {
-                librosDetalle = await _db.LibrosDetalle.Include(l => l.librosEncabezado).Where(l => l.IdLibro == id).FirstOrDefaultAsync();
+                librosDetalle = await _db.LibrosDetalle.Include(l => l.librosEncabezado).Where(l => l.Id == id).FirstOrDefaultAsync();
 
                 string condicion = String.Empty;
                 if (librosDetalle.Condicion == 'N')
