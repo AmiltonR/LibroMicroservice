@@ -166,31 +166,34 @@ namespace Libros.API.Repository
 
         public async Task<LibrosDTO> GetBook(int id)
         {
-            LibrosDTO libro;
+            LibrosDTO libro = null;
             LibrosDetalle librosDetalle;
             try
             {
                 librosDetalle = await _db.LibrosDetalle.Include(l => l.librosEncabezado).Where(l => l.Id == id).FirstOrDefaultAsync();
 
-                string condicion = String.Empty;
-                if (librosDetalle.Condicion == 'N')
+                if(librosDetalle!=null)
                 {
-                    condicion = "Nuevo";
+                    string condicion = String.Empty;
+                    if (librosDetalle.Condicion == 'N')
+                    {
+                        condicion = "Nuevo";
+                    }
+                    else
+                    {
+                        condicion = "Usado";
+                    }
+                    libro = new LibrosDTO
+                    {
+                        Id = librosDetalle.Id,
+                        NombreLibro = librosDetalle.librosEncabezado.NombreLibro,
+                        Isbn = librosDetalle.Isbn,
+                        Condicion = condicion,
+                        Editorial = librosDetalle.Editorial,
+                        Detalle = librosDetalle.Detalle,
+                        FechaIngreso = librosDetalle.FechaIngreso.ToShortDateString()
+                    };
                 }
-                else
-                {
-                    condicion = "Usado";
-                }
-                libro = new LibrosDTO
-                {
-                    Id = librosDetalle.Id,
-                    NombreLibro = librosDetalle.librosEncabezado.NombreLibro,
-                    Isbn = librosDetalle.Isbn,
-                    Condicion = condicion,
-                    Editorial = librosDetalle.Editorial,
-                    Detalle = librosDetalle.Detalle,
-                    FechaIngreso = librosDetalle.FechaIngreso.ToShortDateString()
-                };
             }
             catch (Exception)
             {
