@@ -1,12 +1,8 @@
 {
   "dependencies": {
-    "secrets2": {
-      "type": "secrets.user",
-      "dynamicId": null
-    },
     "mssql1": {
       "secretStore": null,
-      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/bibliotecalibrosserver/databases/BibliotecaLibros",
+      "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/bibliotecaprestamosserver/databases/BibliotecaLibros",
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:DefaultConnection",
       "dynamicId": null

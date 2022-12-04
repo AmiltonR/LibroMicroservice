@@ -4,7 +4,7 @@
   "parameters": {
     "resourceGroupName": {
       "type": "string",
-      "defaultValue": "Biblioteca",
+      "defaultValue": "proyectobiblioteca",
       "metadata": {
         "_parameterType": "resourceGroup",
         "description": "Name of the resource group for the resource. It is recommended to put resources under same resource group for better tracking."
@@ -51,23 +51,23 @@
             {
               "kind": "v12.0",
               "location": "[parameters('resourceLocation')]",
-              "name": "bibliotecalibrosserver",
+              "name": "bibliotecaprestamosserver",
               "type": "Microsoft.Sql/servers",
               "apiVersion": "2017-10-01-preview"
             },
             {
               "sku": {
-                "name": "Free",
-                "tier": "Free",
+                "name": "Basic",
+                "tier": "Basic",
                 "capacity": 5
               },
               "kind": "v12.0,user",
               "location": "[parameters('resourceLocation')]",
-              "name": "bibliotecalibrosserver/BibliotecaLibros",
+              "name": "bibliotecaprestamosserver/BibliotecaLibros",
               "type": "Microsoft.Sql/servers/databases",
               "apiVersion": "2017-10-01-preview",
               "dependsOn": [
-                "bibliotecalibrosserver"
+                "bibliotecaprestamosserver"
               ]
             }
           ]
